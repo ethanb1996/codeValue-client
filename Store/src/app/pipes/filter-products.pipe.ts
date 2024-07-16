@@ -7,7 +7,6 @@ import { Product } from '../types/product';
 export class FilterProductsPipe implements PipeTransform {
 
   transform(products: (Product[] | null), query: string): Product[] {
-    console.log(query)
     if (!products || !query) {
       return products || [];
     }

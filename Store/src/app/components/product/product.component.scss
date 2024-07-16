@@ -1,14 +1,13 @@
 .product-container {
     display: flex;
     flex-direction: row;
-    height: 100%; /* Full height of each part */
-    
+    height: 100%; 
     
     .part {
-        flex: 1; /* Take equal space in the container */
+        flex: 1; 
         padding: 10px;
         box-sizing: border-box;
-        overflow: auto; /* Allow internal overflow to be scrollable */
+        overflow: auto; 
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -19,9 +18,9 @@
         
     }
     .text {
-        flex-grow: 1; /* Allow text sections to grow */
+        flex-grow: 1;
         display: flex;
-        align-items: center; /* Vertically center content */
+        align-items: center; 
         padding: 5px 0;
     }
 }

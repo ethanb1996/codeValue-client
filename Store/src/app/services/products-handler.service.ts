@@ -28,7 +28,6 @@ export class ProductsHandlerService {
     p.id = products.length+1;
     products.push(p)
     this.updateLocalStorage(products);
-    // this.productsStoreService.setProducts(products);
   }
   
   update(productToUpdate:Product){
@@ -37,7 +36,6 @@ export class ProductsHandlerService {
     if(productToDeleteIndex > -1){
       products[productToDeleteIndex] = productToUpdate;
       this.updateLocalStorage(products);
-      // this.productsStoreService.setProducts(products);
     }
   }
 }

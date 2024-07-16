@@ -12,8 +12,6 @@ export class SortbyProductsPipe implements PipeTransform {
   };
 
   transform(products: (Product[] | null), query: string): Product[] {
-    console.log(query);
-    
     if (!products || !query || !this.sortFunctions[query]) {
       return products || [];
     }

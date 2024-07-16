@@ -1,66 +1,65 @@
 .container {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    width: 100vw; 
-    overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 
-    .part {
-      flex: 1 1 50%; /* Take equal space in the container */
-      padding: 10px;
-      box-sizing: border-box;
-      width: 50%;
-        
-      &:not(:last-child) {
-        border-right: 1px solid #ccc; /* Add a separator line */
-      }
+  .part {
+    flex: 1 1 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 50%;
+
+    &:not(:last-child) {
+      border-right: 1px solid #ccc;
     }
-  
-    .product-list-part {
-      /* Specific styles for product list part can go here if needed */
+  }
+
+
+  .product-details-part {
+    margin: auto;
+  }
+
+  .product-list {
+    h2 {
+      margin-bottom: 10px;
     }
-  
-    .product-details-part {
-      margin: auto;
-      /* Specific styles for product details part can go here if needed */
-    }
-  
-    .product-list {
-      h2 {
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      max-height: 500px;
+      overflow: hidden;
+      overflow-y: scroll;
+
+      li {
         margin-bottom: 10px;
+        cursor: pointer;
       }
-  
-      ul {
-        list-style-type: none;
-        padding: 0;
-  
-        li {
-          margin-bottom: 10px;
-          cursor: pointer;
-        }
 
-        :hover {
-          background-color: #f5f5f5ea;
-          
-        }
-        
+      :hover {
+        background-color: #f5f5f5ea;
+
       }
-  
-      button {
-        margin-top: 20px;
-      }
+
     }
 
-    .actions{
-      display: flex;
-      align-items: center;
+    button {
+      margin-top: 20px;
+    }
+  }
 
-      .action{
-        margin: 8px;
+  .actions {
+    display: flex;
+    align-items: center;
 
-        button{
-          margin: auto;
-        }
+    .action {
+      margin: 8px;
+
+      button {
+        margin: auto;
       }
     }
   }
+}

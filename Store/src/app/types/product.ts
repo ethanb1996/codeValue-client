@@ -4,6 +4,7 @@ export type Product  = {
     description: string;
     price: number;
     creationDate: Date | null;
+    img: string;
 }
 
 export const EMPTY_PRODUCT : Product = {
@@ -12,4 +13,5 @@ export const EMPTY_PRODUCT : Product = {
     description: '',
     price: 0,
     creationDate: null,
+    img: '../assets/product1.jpg'
   }

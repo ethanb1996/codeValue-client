@@ -2,19 +2,17 @@
   <div class="part product-list-part">
     <div class="product-list">
       <div class="actions">
-        <div class="action">
-          <button (click)="onAdd()">Add New Product</button>
+        <div class="action form-group">
+          <button class="btn btn-success"(click)="onAdd()">Add New Product</button>
         </div>
-        <div class="action">
-          <input type="text" placeholder="Search Your product" [(ngModel)]="query">
+        <div class="action form-group">
+          <input class="form-control" type="text" placeholder="Search Your product" [(ngModel)]="query">
         </div>
-        <div class="action">
-          <div class="form-group">
-            <label for="sortBy">Sort by</label>
+        <div class="action form-group">
             <select class="form-control" id="sortBy" required [(ngModel)]="sortByQuery">
+              <option value="" disabled selected>Sort by</option>
               <option *ngFor="let option of SORT_BY_OPTIONS" [value]="option.col">{{option.display}}</option>
             </select>
-          </div>
         </div>
       </div>
       <ul>
@@ -25,6 +23,6 @@
     </div>
   </div>
   <div class="part product-details-part">
-    <app-product-details [product]="selectedProduct$ | async"></app-product-details>
+    <app-product-details [product]="selectedProduct"></app-product-details>
   </div>
 </div>

@@ -12,16 +12,16 @@ import { EMPTY_PRODUCT, Product } from 'src/app/types/product';
 export class StoreComponent {
   public query:string = '';
   public sortByQuery: any = ''
-  public selectedProduct$ = new BehaviorSubject<Product>(EMPTY_PRODUCT);
+  public selectedProduct = EMPTY_PRODUCT;
   
   public SORT_BY_OPTIONS = [{display:'name',col:'name'},{display:'Recently Added', col:'creationDate'}]
   constructor(public productsStoreService:ProductsStoreService){}
 
   onSelect(p: Product){
-    this.selectedProduct$.next(p);
+    this.selectedProduct = p;
   }
 
   onAdd(){
-    this.selectedProduct$.next(EMPTY_PRODUCT)
+    this.selectedProduct = EMPTY_PRODUCT
   }
 }

@@ -7,7 +7,7 @@ export type Product  = {
 }
 
 export const EMPTY_PRODUCT : Product = {
-    id:null,
+    id: null,
     name: '',
     description: '',
     price: 0,

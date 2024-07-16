@@ -20,6 +20,8 @@ export class ProductsHandlerService {
 
   add(p:Product){
     let products = this.productsStoreService.getProductsSnapShot();
+    p.id = products.length+1;
+    p.creationDate = new Date();
     products.push(p)
     this.productsStoreService.setProducts(products);
   }

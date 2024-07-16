@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ProductsHandlerService } from 'src/app/services/products-handler.service';
 import { EMPTY_PRODUCT, Product } from 'src/app/types/product';
 
 @Component({
@@ -6,10 +7,22 @@ import { EMPTY_PRODUCT, Product } from 'src/app/types/product';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
-export class ProductDetailsComponent {
-  @Input() product : Product | null = EMPTY_PRODUCT;
+export class ProductDetailsComponent implements OnChanges{
+  @Input() product!: Product;
+  public updateProduct: Product = { ...EMPTY_PRODUCT };
 
-  constructor(){}
+  constructor(private productsHandlerService: ProductsHandlerService) { }
 
-  onSubmit(){}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['product'] && changes['product'].currentValue) {
+      this.updateProduct = { ...changes['product'].currentValue };
+    }
+  }
+  onSubmit(){
+    if (this.product?.id) {
+      this.productsHandlerService.update(this.updateProduct);
+    } else {
+      this.productsHandlerService.add(this.updateProduct);
+    }
+  }
 }

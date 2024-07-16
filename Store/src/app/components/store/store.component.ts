@@ -10,8 +10,11 @@ import { EMPTY_PRODUCT, Product } from 'src/app/types/product';
   styleUrls: ['./store.component.scss']
 })
 export class StoreComponent {
+  public query:string = '';
+  public sortByQuery: any = ''
   public selectedProduct$ = new BehaviorSubject<Product>(EMPTY_PRODUCT);
-
+  
+  public SORT_BY_OPTIONS = [{display:'name',col:'name'},{display:'Recently Added', col:'creationDate'}]
   constructor(public productsStoreService:ProductsStoreService){}
 
   onSelect(p: Product){

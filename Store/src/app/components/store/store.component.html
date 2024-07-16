@@ -1,26 +1,30 @@
 <div class="container">
   <div class="part product-list-part">
     <div class="product-list">
-        <div class="actions">
-          <div class="action">
-            <button (click)="onAdd()">Add New Product</button>
-          </div>
-          <div class="action">
-            <button (click)="onAdd()">Add New Product</button>
-          </div>
-          <div class="action">
-            <button (click)="onAdd()">Add New Product</button>
-          </div>
-          
+      <div class="actions">
+        <div class="action">
+          <button (click)="onAdd()">Add New Product</button>
         </div>
-        <ul>
-          <li *ngFor="let product of productsStoreService.getProducts() | async">
-            <app-product (click)="onSelect(product)" [product]="product"></app-product>
-          </li>
-        </ul>
+        <div class="action">
+          <input type="text" placeholder="Search Your product" [(ngModel)]="query">
+        </div>
+        <div class="action">
+          <div class="form-group">
+            <label for="sortBy">Sort by</label>
+            <select class="form-control" id="sortBy" required [(ngModel)]="sortByQuery">
+              <option *ngFor="let option of SORT_BY_OPTIONS" [value]="option.col">{{option.display}}</option>
+            </select>
+          </div>
+        </div>
       </div>
+      <ul>
+        <li *ngFor="let product of (productsStoreService.getProducts() | async) | filterProducts : query | sortbyProducts: sortByQuery">
+          <app-product (click)="onSelect(product)" [product]="product"></app-product>
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="part product-details-part">
     <app-product-details [product]="selectedProduct$ | async"></app-product-details>
-  </div>  
+  </div>
 </div>

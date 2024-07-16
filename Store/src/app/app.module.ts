@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';   
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';   
 
 import { AppComponent } from './app.component';
 import { StoreComponent } from './components/store/store.component';
@@ -20,7 +20,8 @@ import { SortbyProductsPipe } from './pipes/sortby-products.pipe';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    ReactiveFormsModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductsHandlerService } from 'src/app/services/products-handler.service';
 import { EMPTY_PRODUCT, Product } from 'src/app/types/product';
 
@@ -10,29 +11,35 @@ import { EMPTY_PRODUCT, Product } from 'src/app/types/product';
 export class ProductDetailsComponent implements OnChanges{
   @Input() product!: Product;
   public updateProduct: Product = { ...EMPTY_PRODUCT };
-
-  // TODO - 8. Add validation to the details pane. 
-  // The save button should only be enabled if the properties contain valid values 
-  // (for example, name is not empty, price is greater than zero, etc.) 
-  // 1.ID (number, unique
-  // 2. Name (string, up to 30 characters, mandatory) 
-  // 3. Description (string, up to 200 characters, optional) 
-  // 4. Price (number, larger than zero, mandatory) 
-  // 5. Creation Date (Date, mandatory)
+  public productForm: FormGroup;
+ 
 
 
-  constructor(private productsHandlerService: ProductsHandlerService) { }
+  constructor(private productsHandlerService: ProductsHandlerService,private fb: FormBuilder) { 
+    this.productForm = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(30)]],   // Name: Required, max length 30
+      description: ['', Validators.maxLength(200)],                  // Description: max length 200
+      price: [null, [Validators.required, Validators.min(0.01)]],    // Price: Required, must be greater than zero
+      creationDate: ['', Validators.required]                        // Creation Date: Required
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['product'] && changes['product'].currentValue) {
-      this.updateProduct = { ...changes['product'].currentValue };
+      this.updateProduct = {...this.updateProduct, ...changes['product'].currentValue };
+      this.productForm.patchValue(this.updateProduct);
     }
   }
   onSubmit(){
-    if (this.product?.id) {
-      this.productsHandlerService.update({...this.updateProduct});
-    } else {
-      this.productsHandlerService.add({...this.updateProduct});
+
+    if (this.productForm.valid) {
+      this.updateProduct = {...this.updateProduct,  ...this.productForm.value};
+
+      if (this.updateProduct.id) {
+        this.productsHandlerService.update(this.updateProduct);
+      } else {
+        this.productsHandlerService.add(this.updateProduct);
+      }
     }
   }
 }

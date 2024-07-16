@@ -1,20 +1,38 @@
 <div class="container">
     <h1>{{ product.id ? 'Update Your Product' : 'Add a Product' }}</h1>
     <img [src]="updateProduct.img" class="img-rounded">
-    <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" required [(ngModel)]="updateProduct.name" name="name" >
+            <input type="text" class="form-control" id="name" formControlName="name" required>
+            <div *ngIf="productForm.get('name')?.invalid && (productForm.get('name')?.dirty || productForm.get('name')?.touched)" class="text-danger">
+                Name is required and must be up to 30 characters long.
+            </div>
         </div>
         
         <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" required [(ngModel)]="updateProduct.description" name="description">
+            <input type="text" class="form-control" id="description" formControlName="description">
+            <div *ngIf="productForm.get('description')?.invalid && (productForm.get('description')?.dirty || productForm.get('description')?.touched)" class="text-danger">
+                Description must be up to 200 characters long.
+            </div>
         </div>
+
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="text" class="form-control" id="price" required [(ngModel)]="updateProduct.price" name="price">
+            <input type="number" class="form-control" id="price" formControlName="price" required>
+            <div *ngIf="productForm.get('price')?.invalid && (productForm.get('price')?.dirty || productForm.get('price')?.touched)" class="text-danger">
+                Price is required and must be larger than zero.
+            </div>
         </div>
-        <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid">{{ updateProduct.id ? 'Update' : 'Add a new Product' }}</button>
+
+        <div class="form-group">
+            <label for="creationDate">Creation Date</label>
+            <input type="date" class="form-control" id="creationDate" formControlName="creationDate" required>
+            <div *ngIf="productForm.get('creationDate')?.invalid && (productForm.get('creationDate')?.dirty || productForm.get('creationDate')?.touched)" class="text-danger">
+                Creation Date is required.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="productForm.invalid">{{ updateProduct.id ? 'Update' : 'Add a new Product' }}</button>
     </form>
 </div>

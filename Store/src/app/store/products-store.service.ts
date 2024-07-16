@@ -8,9 +8,16 @@ import { PRODUCTS } from '../data';
 })
 export class ProductsStoreService {
 
-  private products$ = new BehaviorSubject<Product[]>(PRODUCTS)
+  private products$ = new BehaviorSubject<Product[]>([])
   
-  constructor() {}
+  constructor() {
+    this.loadProductsFromLocalStorage()
+  }
+
+  private loadProductsFromLocalStorage(): void {
+    const products = JSON.parse(localStorage.getItem('products') || JSON.stringify(PRODUCTS));
+    this.setProducts(products);
+  }
 
   getProducts(): Observable<Product[]>{
     return this.products$.asObservable();
